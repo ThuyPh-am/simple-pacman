@@ -2,6 +2,7 @@ import pygame
 from agents import Agent
 from env import Block
 from ghost import Ghost
+from food import Food
 
 pygame.init()
 screen = pygame.display.set_mode((1000, 480))
@@ -11,6 +12,7 @@ def main():
     env = Block()
     agent = Agent(env)
     ghost = Ghost(agent,env)
+    food = Food(env)
 
 
     running = True
@@ -19,6 +21,8 @@ def main():
         clock.tick(60)
         screen.fill((0,0,0))
         env.draw_env(screen)
+        food.food_generator()
+        food.food_load()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -29,6 +33,7 @@ def main():
 
         agent.draw()
         ghost.draw()
+        food.draw()
         pygame.display.flip()
 
 if __name__ == "__main__":
