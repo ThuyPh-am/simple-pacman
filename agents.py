@@ -11,7 +11,7 @@ class Agent:
     def __init__(self, env):
         self.x = 50
         self.y = 50
-        self.vel = 10
+        self.vel = 3
         self.width = 10
         self.height = 10
         self.color = (0,0,255)
@@ -21,7 +21,7 @@ class Agent:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT] and self.x > self.vel and not self.env.is_block(self.x-self.vel, self.y):
             self.x -= self.vel
-        if keys[pygame.K_RIGHT] and self.x < 900 - self.width - self.vel and not self.env.is_block(self.x + self.vel, self.y):
+        if keys[pygame.K_RIGHT] and self.x < 1000 - self.width - self.vel and not self.env.is_block(self.x + self.vel, self.y):
             self.x += self.vel
         if keys[pygame.K_UP]  and self.y > self.vel and not self.env.is_block(self.x, self.y - self.vel):
             self.y -= self.vel

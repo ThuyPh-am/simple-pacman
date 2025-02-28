@@ -11,8 +11,8 @@ class Ghost:
     def __init__(self,agent, env):
         self.x = 20
         self.y = 20
-        self.vel_chase = 3
-        self.vel_normal = 2
+        self.vel_chase = 2
+        self.vel_normal = 1
         self.width = 10
         self.height = 10
         self.color = (0,255,0)

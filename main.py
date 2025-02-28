@@ -13,6 +13,7 @@ def main():
     agent = Agent(env)
     ghost = Ghost(agent,env)
     food = Food(env)
+    food.food_generator()
 
 
     running = True
@@ -21,8 +22,6 @@ def main():
         clock.tick(60)
         screen.fill((0,0,0))
         env.draw_env(screen)
-        food.food_generator()
-        food.food_load()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -30,6 +29,7 @@ def main():
         agent.move()
         ghost.chase()
         ghost.hit()
+        food.eating(agent.x, agent.y)
 
         agent.draw()
         ghost.draw()
