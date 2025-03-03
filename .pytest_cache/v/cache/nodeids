@@ -1,0 +1,5 @@
+[
+  "test_project.py::test_eating",
+  "test_project.py::test_losing",
+  "test_project.py::test_wining"
+]

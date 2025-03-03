@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 
 pygame.init()
 screen = pygame.display.set_mode((680, 480))
@@ -33,11 +34,11 @@ class Block:
                 "#                       #              #              #",
                 " ##########   ## ########    ##### #####    ##### #####"]
         
-        #starting position
         self.x_start = 50
         self.y_start = 80
-
         self.block_size = 15
+        self.block_grid = set() 
+        self.grid_generate()
 
     def draw_env(self,screen):
         for y, line in enumerate(self.cs50):
@@ -47,29 +48,20 @@ class Block:
                                     (self.x_start + x * self.block_size, self.y_start + y * self.block_size, 
                                     self.block_size, self.block_size))
                     
-    def is_block(self, obj_x, obj_y):
+    def grid_generate(self):
         for y_idx, line in enumerate(self.cs50):
             for x_idx, char in enumerate(line):
                 if char == "#":
                     block_x = self.x_start + x_idx * self.block_size
                     block_y = self.y_start + y_idx * self.block_size
+                    self.block_grid.add((block_x, block_y, self.block_size, self.block_size))
+        return self.block_grid
 
-                    if block_x <= obj_x <= block_x + self.block_size and block_y <= obj_y <= block_y + self.block_size:
-                        return True
+
+    def is_block(self, x,y,width,height):
+        obj_rect = pygame.Rect(x,y, width, height)
+        for block_x, block_y, block_width, block_height in self.block_grid:
+            if pygame.Rect.colliderect(Rect(block_x, block_y, block_width, block_height),obj_rect):
+                return True
         return False
 
-# def main():
-#     running = True
-#     draw_env()
-
-#     while running:
-#         clock.tick(60)
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-
-#     pygame.quit()
-
-
-# if __name__ == "__main__":
-#     main()

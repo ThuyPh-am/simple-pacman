@@ -19,52 +19,20 @@ class Agent:
 
     def move(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT] and self.x > self.vel and not self.env.is_block(self.x-self.vel, self.y):
-            self.x -= self.vel
-        if keys[pygame.K_RIGHT] and self.x < 1000 - self.width - self.vel and not self.env.is_block(self.x + self.vel, self.y):
-            self.x += self.vel
-        if keys[pygame.K_UP]  and self.y > self.vel and not self.env.is_block(self.x, self.y - self.vel):
-            self.y -= self.vel
-        if keys[pygame.K_DOWN] and self.y < 480 - self.height - self.vel and not self.env.is_block(self.x, self.y + self.vel):
-            self.y += self.vel
+        new_x, new_y = self.x, self.y
+        if keys[pygame.K_LEFT] and self.x > self.vel:
+            new_x -= self.vel
+        if keys[pygame.K_RIGHT] and self.x < 1000 - self.width:
+            new_x += self.vel
+        if keys[pygame.K_UP]  and self.y > self.vel:
+            new_y -= self.vel
+        if keys[pygame.K_DOWN] and self.y < 480 - self.height:
+            new_y += self.vel
+
+        if not self.env.is_block(new_x, new_y, self.width, self.height):
+            self.x = new_x
+            self.y = new_y
     
     def draw(self):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
     
-    # def jump(self):
-    #     keys = pygame.key.get_pressed()
-    #     if self.is_jumping:
-    #         if self.jump_count >= -10:
-    #             neg = 1
-    #             if self.jump_count < 0:
-    #                 neg = -1
-    #             self.y -= (self.jump_count ** 2) * 0.5 * neg
-    #             self.jump_count -= 1
-    #         else:
-    #             self.is_jumping = False
-    #             self.jump_count = 10
-
-    #     elif keys[pygame.K_SPACE]:
-    #         self.is_jumping = True 
-
-        
-
-# def main():
-#     running = True
-#     player= Agent()
-    
-#     while running:
-#         clock.tick(60)
-#         screen.fill((0,0,0))
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-        
-#         player.move()
-#         player.jump()
-#         player.draw()
-
-#         pygame.display.flip()
-
-# if __name__ == "__main__":
-#     main()
