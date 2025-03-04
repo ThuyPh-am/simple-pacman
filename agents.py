@@ -1,4 +1,3 @@
-# refer to Tech With Tim
 import pygame
 from env import Block
 

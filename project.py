@@ -51,10 +51,9 @@ def main():
             if losing(agent, ghost):
                 print("You lose!")
                 running = False
-
         else: ghost.moving()
 
-        food.eating(agent.x, agent.y)
+        eating(agent, food)
 
         if wining(agent, food):
             print("You win!")
